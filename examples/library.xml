@@ -1,0 +1,17 @@
+<library>
+  <block id="DIN_RAIL_35MM" />
+
+  <block id="BREAKER_120">
+    <connector id="L_IN" type="power_in" x="0" y="0" dx="-1" dy="0" />
+    <connector id="L_OUT" type="power_out" x="20" y="0" dx="1" dy="0" />
+  </block>
+
+  <block id="PSU_24V">
+    <connector id="AC_IN" type="power_in" x="0" y="0" dx="-1" dy="0" />
+    <connector id="DC_OUT" type="dc_out" x="24" y="0" dx="1" dy="0" />
+  </block>
+
+  <block id="PLC_DC24">
+    <connector id="DC_IN" type="dc_in" x="0" y="0" dx="-1" dy="0" />
+  </block>
+</library>

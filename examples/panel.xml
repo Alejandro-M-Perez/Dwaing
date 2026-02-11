@@ -1,0 +1,11 @@
+<panel name="MVP_PANEL_A">
+  <region id="left_bay" min_x="0" min_y="0" max_x="400" max_y="800" />
+  <region id="right_bay" min_x="401" min_y="0" max_x="800" max_y="800" />
+
+  <rail id="rail_left_1" region="left_bay" x1="40" y1="120" x2="360" y2="120" />
+  <rail id="rail_left_2" region="left_bay" x1="40" y1="220" x2="360" y2="220" />
+
+  <device id="brk1" block="BREAKER_120" region="left_bay" rail="rail_left_1" x="80" y="120" domain="AC" ac_level="120" />
+  <device id="psu1" block="PSU_24V" region="left_bay" rail="rail_left_1" x="130" y="120" domain="AC" ac_level="120" />
+  <device id="plc1" block="PLC_DC24" region="left_bay" rail="rail_left_2" x="80" y="220" domain="DC" />
+</panel>
