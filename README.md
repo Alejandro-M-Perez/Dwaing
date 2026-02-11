@@ -8,6 +8,7 @@ It supports:
 - panel modeling with regions, rails, and placed devices
 - XML-driven CLI workflow
 - validation of geometry/electrical rules (AC/DC and AC voltage level segregation)
+- OpenGL viewer for vector rendering (regions, rails, devices, sample boxes)
 
 ## How The Program Works Today
 
@@ -39,6 +40,8 @@ Then it either:
 
 - GCC/Clang compatible C compiler (`cc`)
 - `make`
+- OpenGL development libraries
+- SDL2 development libraries
 
 ### Build
 
@@ -47,6 +50,14 @@ make
 ```
 
 This creates the executable at `bin/dwaing`.
+
+### Build the OpenGL viewer
+
+```sh
+make viewer
+```
+
+This creates `bin/dwaing_viewer`.
 
 ### Run with sample files
 
@@ -62,6 +73,24 @@ make run-example
 ```
 
 This runs both `validate` and `summary` using the sample XML files.
+
+### Launch the viewer
+
+```sh
+./bin/dwaing_viewer examples/panel.xml
+```
+
+or:
+
+```sh
+make run-viewer
+```
+
+Viewer controls:
+- `+` / `-` zoom in/out
+- arrow keys pan
+- `r` reset view
+- `q` or `ESC` quit
 
 ### Clean build artifacts
 
@@ -100,3 +129,12 @@ The parser is intentionally strict and minimal (dependency-free).
 See:
 - `examples/library.xml`
 - `examples/panel.xml`
+
+## Viewer Notes
+
+- Regions are drawn as green outlines.
+- Rails are drawn as brown line segments.
+- Devices are drawn as small outlined boxes:
+  - red for AC
+  - blue for DC
+- Extra sample vector geometry boxes are always rendered near the top area, each labeled with width/height.

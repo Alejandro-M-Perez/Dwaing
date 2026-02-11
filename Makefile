@@ -1,18 +1,37 @@
 CC := cc
 CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -O2 -Iinclude
 LDFLAGS := -lm
+SDL2_CFLAGS := $(shell pkg-config --cflags sdl2)
+SDL2_LIBS := $(shell pkg-config --libs sdl2)
+OPENGL_LIBS ?= -lGL -lGLU
 
-SRC := $(wildcard src/*.c)
-OBJ := $(SRC:.c=.o)
+CORE_OBJ := src/geom.o src/model.o src/parser.o src/rules.o
+PANEL_OBJ := src/geom.o src/model.o src/parser.o
+CLI_OBJ := src/main.o
+VIEWER_OBJ := src/viewer.o
+
 BIN := bin/dwaing
+VIEWER_BIN := bin/dwaing_viewer
 
-.PHONY: all clean run-example
+.PHONY: all clean run-example viewer run-viewer
 
 all: $(BIN)
 
-$(BIN): $(OBJ)
+$(BIN): $(CLI_OBJ) $(CORE_OBJ)
 	@mkdir -p bin
-	$(CC) $(OBJ) -o $@ $(LDFLAGS)
+	$(CC) $(CLI_OBJ) $(CORE_OBJ) -o $@ $(LDFLAGS)
+
+$(VIEWER_BIN): $(VIEWER_OBJ) $(PANEL_OBJ)
+	@mkdir -p bin
+	$(CC) $(VIEWER_OBJ) $(PANEL_OBJ) -o $@ $(LDFLAGS) $(SDL2_LIBS) $(OPENGL_LIBS)
+
+viewer: $(VIEWER_BIN)
+
+run-viewer: $(VIEWER_BIN)
+	./$(VIEWER_BIN) examples/panel.xml
+
+src/viewer.o: src/viewer.c
+	$(CC) $(CFLAGS) $(SDL2_CFLAGS) -c $< -o $@
 
 src/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
