@@ -1,11 +1,50 @@
-<panel name="MVP_PANEL_A">
-  <region id="left_bay" min_x="0" min_y="0" max_x="400" max_y="800" />
-  <region id="right_bay" min_x="401" min_y="0" max_x="800" max_y="800" />
+<panel name="FEATURE_DEMO_PANEL" width="35.43" height="32.28" back_width="37.01" back_height="33.86">
+  <region id="left_bay" corner="top_left" width="16.93" height="31.50" margin="0.40" flow="vertical">
+    <region id="power_area" corner="top_left" width="16.14" height="12.60" margin="0.40">
+      <wire_duct id="duct_power_top" orientation="H" length="14.17" width_in="2" align="top" margin="0.55" gap="0.31" />
+      <wire_duct id="duct_power_left" orientation="V" length="9.84" width_in="1.5" align="left" margin="0.55" />
 
-  <rail id="rail_left_1" region="left_bay" x1="40" y1="120" x2="360" y2="120" />
-  <rail id="rail_left_2" region="left_bay" x1="40" y1="220" x2="360" y2="220" />
+      <rail id="rail_power_h" orientation="H" layout="horizontal" align="top" offset="3.39" margin="1.02">
+        <device id="brk_main_1" block="BREAKER_120" domain="AC" ac_level="120" Amax="20" align="center" gap="0.55" />
+        <device id="brk_main_2" block="BREAKER_120" domain="AC" ac_level="120" Amax="20" align="center" gap="0.55" />
+        <device id="psu_main" block="PSU_24V" domain="AC" ac_level="120" Amax="8" relation="next_to" of="brk_main_2" self_connector="LEFT" target_connector="RIGHT" gap="0.87" />
+      </rail>
 
-  <device id="brk1" block="BREAKER_120" region="left_bay" rail="rail_left_1" x="80" y="120" domain="AC" ac_level="120" />
-  <device id="psu1" block="PSU_24V" region="left_bay" rail="rail_left_1" x="130" y="120" domain="AC" ac_level="120" />
-  <device id="plc1" block="PLC_DC24" region="left_bay" rail="rail_left_2" x="80" y="220" domain="DC" />
+      <rail id="rail_power_v" orientation="V" layout="vertical" align="right" offset="-1.02" margin="0.94" length="8.66">
+        <device id="plc_aux_1" block="PLC_DC24" domain="DC" Amax="2" align="left" gap="0.63" />
+        <device id="plc_aux_2" block="PLC_DC24" domain="DC" Amax="2" align="left" gap="0.63" />
+      </rail>
+    </region>
+
+    <region id="control_stack" corner="bottom_left" size="auto" flow="horizontal" margin="0.63">
+      <region id="control_a" corner="top_left" width="6.30" height="7.87" margin="0.40">
+        <rail id="rail_ctrl_a" orientation="H" layout="vertical" align="center" offset="0" margin="0.87">
+          <device id="plc_a1" block="PLC_DC24" domain="DC" Amax="2" align="right" gap="0.79" />
+          <device id="plc_a2" block="PLC_DC24" domain="DC" Amax="2" align="right" gap="0.79" />
+        </rail>
+      </region>
+
+      <region id="control_b" corner="top_right" width="7.09" height="8.66" margin="0.40">
+        <rail id="rail_ctrl_b" orientation="V" layout="horizontal" align="center" margin="0.94" length="5.91">
+          <device id="ctrl_breaker" block="BREAKER_120" domain="AC" ac_level="120" Amax="15" align="left" gap="0.63" />
+          <device id="ctrl_psu" block="PSU_24V" domain="AC" ac_level="120" Amax="6" align="below" gap="0.63" />
+        </rail>
+      </region>
+    </region>
+  </region>
+
+  <region id="right_bay" corner="top_right" width="16.93" height="31.50" margin="0.40">
+    <wire_duct id="duct_right_explicit" x="18.50" y="2.20" orientation="H" length="14.17" width_in="2.5" />
+    <wire_duct id="duct_right_auto_v" orientation="V" length="24.41" width_in="2" align="right" margin="0.71" />
+
+    <rail id="rail_service_explicit" x1="19.69" y1="7.09" x2="31.10" y2="7.09">
+      <device id="svc_breaker" block="BREAKER_120" domain="AC" ac_level="120" x="21.26" y="7.09" Amax="18" />
+      <device id="svc_psu" block="PSU_24V" domain="AC" ac_level="120" Amax="7" relation="next_to" of="svc_breaker" self_connector="LEFT" target_connector="RIGHT" gap="0.94" />
+    </rail>
+
+    <rail id="rail_service_auto" orientation="H" layout="horizontal" align="bottom" offset="-3.15" margin="1.10">
+      <device id="svc_plc_1" block="PLC_DC24" domain="DC" Amax="2" align="above" gap="0.71" />
+      <device id="svc_plc_2" block="PLC_DC24" domain="DC" Amax="2" align="above" gap="0.71" />
+    </rail>
+  </region>
 </panel>

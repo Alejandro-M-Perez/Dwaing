@@ -1,0 +1,33 @@
+<library>
+  <symbol id="MOTOR" name="Motor" width="6" height="3">
+    <port id="LINE" x="0" y="1.5" dx="-1" dy="0" voltage="AC480" />
+    <port id="LOAD" x="6" y="1.5" dx="1" dy="0" voltage="AC480" />
+  </symbol>
+
+  <symbol id="BREAKER" name="Breaker" width="4" height="2">
+    <port id="LINE" x="0" y="1" dx="-1" dy="0" voltage="AC480" />
+    <port id="LOAD" x="4" y="1" dx="1" dy="0" voltage="AC480" />
+  </symbol>
+
+  <symbol id="PUMP" name="Pump" width="5" height="3">
+    <port id="IN" x="0" y="1.5" dx="-1" dy="0" />
+    <port id="OUT" x="5" y="1.5" dx="1" dy="0" />
+  </symbol>
+
+  <symbol id="TANK" name="Tank" width="6" height="5">
+    <port id="IN" x="0" y="2.5" dx="-1" dy="0" />
+    <port id="OUT" x="6" y="2.5" dx="1" dy="0" />
+  </symbol>
+
+  <symbol id="VALVE" name="Valve" width="2.5" height="2.5">
+    <port id="IN" x="0" y="1.25" dx="-1" dy="0" />
+    <port id="OUT" x="2.5" y="1.25" dx="1" dy="0" />
+  </symbol>
+
+  <assembly id="PUMP_SKID" name="Pump Skid" width="18" height="8">
+    <port id="IN" x="0" y="4" dx="-1" dy="0" />
+    <port id="OUT" x="18" y="4" dx="1" dy="0" />
+    <member asset="PUMP" x="2" y="2.5" />
+    <member asset="VALVE" x="9" y="2.75" />
+  </assembly>
+</library>

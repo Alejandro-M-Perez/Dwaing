@@ -1,0 +1,33 @@
+<panel name="AB_DEMO_PANEL" width="42" height="30" back_width="42" back_height="30">
+  <region id="power_bay" corner="top_left" width="19" height="29" margin="0.5">
+    <wire_duct id="power_top_duct" orientation="H" length="16.5" width_in="2" align="top" margin="0.5" />
+
+    <rail id="rail_480" orientation="H" layout="horizontal" align="top" offset="4.5" margin="1.0">
+      <device id="disc_main" block="AB_MainDisconnect" domain="AC" ac_level="480" Amax="40" align="center" gap="0.75" />
+      <device id="brk_480" block="AB_CircuitBreaker_480" domain="AC" ac_level="480" Amax="25" align="center" gap="0.75" />
+      <device id="xfmr_ctl" block="AB_ControlTransformer_480_120" domain="AC" ac_level="480" Amax="10" align="center" gap="0.75" />
+    </rail>
+
+    <rail id="rail_120" orientation="H" layout="horizontal" align="bottom" offset="-5.0" margin="1.0">
+      <device id="brk_120" block="AB_CircuitBreaker_120" domain="AC" ac_level="120" Amax="10" align="center" gap="0.75" />
+      <device id="psu_24" block="AB_PowerSupply_24VDC" domain="AC" ac_level="120" Amax="8" align="center" gap="0.75" />
+    </rail>
+  </region>
+
+  <region id="controls_bay" corner="top_right" width="21" height="29" margin="0.5">
+    <wire_duct id="controls_side_duct" orientation="V" length="24" width_in="2" align="right" margin="0.5" />
+
+    <rail id="rail_dc_main" orientation="H" layout="horizontal" align="top" offset="5.0" margin="1.0">
+      <device id="plc_main" block="AB_CompactLogix5370" domain="DC" Amax="4" align="center" gap="0.8" />
+      <device id="io_in" block="AB_PointIO_Input" domain="DC" Amax="1" align="center" gap="0.8" />
+      <device id="io_out" block="AB_PointIO_Output" domain="DC" Amax="1" align="center" gap="0.8" />
+    </rail>
+
+    <rail id="rail_dc_tb" orientation="H" layout="horizontal" align="bottom" offset="-5.0" margin="1.0">
+      <device id="tb_01" block="AB_TerminalBlock1492" domain="DC" Amax="1" align="center" gap="0.35" />
+      <device id="tb_02" block="AB_TerminalBlock1492" domain="DC" Amax="1" align="center" gap="0.35" />
+      <device id="tb_03" block="AB_TerminalBlock1492" domain="DC" Amax="1" align="center" gap="0.35" />
+      <device id="tb_04" block="AB_TerminalBlock1492" domain="DC" Amax="1" align="center" gap="0.35" />
+    </rail>
+  </region>
+</panel>

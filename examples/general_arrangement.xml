@@ -1,0 +1,7 @@
+<document kind="ga" name="GA_SAMPLE" width="100" height="60">
+  <group id="area_main" x="0" y="0" width="100" height="60">
+    <object id="pump_1" kind="symbol" parent="area_main" asset="PUMP" role="pump" x="10" y="12" />
+    <object id="tank_1" kind="symbol" parent="area_main" asset="TANK" role="tank" x="40" y="18" />
+    <connection id="link_a" kind="link" from="pump_1.OUT" to="tank_1.IN" />
+  </group>
+</document>

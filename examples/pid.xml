@@ -1,0 +1,11 @@
+<document kind="pid" name="PID_SAMPLE" width="120" height="70">
+  <group id="process_area" x="6" y="8" width="108" height="54">
+    <object id="feed_tank" kind="symbol" parent="process_area" asset="TANK" role="tank" x="4" y="12" />
+    <object id="feed_pump" kind="symbol" parent="process_area" asset="PUMP" role="pump" x="34" y="22" />
+    <object id="control_valve" kind="symbol" parent="process_area" asset="VALVE" role="valve" x="62" y="22.25" />
+    <object id="process_skid" kind="symbol" parent="process_area" asset="PUMP_SKID" role="skid" x="80" y="18" />
+    <connection id="line_1" kind="pipe" from="feed_tank.OUT" to="feed_pump.IN" />
+    <connection id="line_2" kind="pipe" from="feed_pump.OUT" to="control_valve.IN" />
+    <connection id="line_3" kind="pipe" from="control_valve.OUT" to="process_skid.IN" />
+  </group>
+</document>

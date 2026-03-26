@@ -1,0 +1,5 @@
+<document kind="one_line" name="ONE_LINE_SAMPLE" width="80" height="30">
+  <object id="main_breaker" kind="symbol" asset="BREAKER" role="breaker" x="8" y="12" />
+  <object id="pump_motor" kind="symbol" asset="MOTOR" role="motor" x="30" y="11.5" />
+  <connection id="feeder_1" kind="wire" from="main_breaker.LOAD" to="pump_motor.LINE" />
+</document>

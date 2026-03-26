@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<library>
+  <block id="AB_MLX1400" name="MicroLogix 1400" width="7.09" height="3.50">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+  </block>
+  <block id="AB_MLX1100" name="MicroLogix 1100" width="4.33" height="3.50">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+  </block>
+  <block id="AB_Micro820" name="Micro820 PLC" width="4.09" height="3.54">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+  </block>
+  <block id="AB_Micro850" name="Micro850 PLC" width="6.22" height="3.54">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+  </block>
+  <block id="AB_CompactLogix5370" name="CompactLogix 5370 L3" width="3.53" height="5.18">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+  </block>
+  <block id="AB_PointIO_Input" name="POINT I/O Input" width="0.48" height="2.23">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+    <connector id="DC_OUT" type="DC24" x="0.48" y="0" dx="1" dy="0"/>
+  </block>
+  <block id="AB_PointIO_Output" name="POINT I/O Output" width="0.47" height="2.21">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+    <connector id="DC_OUT" type="DC24" x="0.47" y="0" dx="1" dy="0"/>
+  </block>
+  <block id="AB_TerminalBlock1492" name="1492 Terminal Block" width="2.36" height="1.56">
+    <connector id="IN" type="AC120" x="0" y="0" dx="-1" dy="0"/>
+    <connector id="OUT" type="AC120" x="2.36" y="0" dx="1" dy="0"/>
+  </block>
+  <block id="AB_VersaView5200" name="VersaView 5200 Thin Client" width="8.27" height="5.51">
+    <connector id="DC_IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+  </block>
+  <block id="AB_MSR_SafetyRelay" name="MSR Safety Relay" width="4.50" height="3.90">
+    <connector id="IN" type="DC24" x="0" y="0" dx="-1" dy="0"/>
+    <connector id="OUT" type="DC24" x="4.50" y="0" dx="1" dy="0"/>
+  </block>
+  <block id="AB_Contactor100C09" name="100‑C09 Contactor" width="1.77" height="3.19">
+    <connector id="AC_IN" type="AC120" x="0" y="0" dx="-1" dy="0"/>
+    <connector id="AC_OUT" type="AC120" x="1.77" y="0" dx="1" dy="0"/>
+  </block>
+  <block id="AB_MainDisconnect" name="Main Disconnect Switch" width="4.0" height="6.0">
+    <connector id="LINE_L1" type="AC480" x="0" y="1" dx="-1" dy="0"/>
+    <connector id="LINE_L2" type="AC480" x="0" y="3" dx="-1" dy="0"/>
+    <connector id="LINE_L3" type="AC480" x="0" y="5" dx="-1" dy="0"/>
+    <connector id="LOAD_L1" type="AC480" x="4" y="1" dx="1" dy="0"/>
+    <connector id="LOAD_L2" type="AC480" x="4" y="3" dx="1" dy="0"/>
+    <connector id="LOAD_L3" type="AC480" x="4" y="5" dx="1" dy="0"/>
+  </block>
+  <block id="AB_CircuitBreaker_480" name="3P Breaker 480VAC" width="3.5" height="3.5">
+    <connector id="IN_L1" type="AC480" x="0" y="1" dx="-1" dy="0"/>
+    <connector id="IN_L2" type="AC480" x="0" y="2" dx="-1" dy="0"/>
+    <connector id="IN_L3" type="AC480" x="0" y="3" dx="-1" dy="0"/>
+    <connector id="OUT_L1" type="AC480" x="3.5" y="1" dx="1" dy="0"/>
+    <connector id="OUT_L2" type="AC480" x="3.5" y="2" dx="1" dy="0"/>
+    <connector id="OUT_L3" type="AC480" x="3.5" y="3" dx="1" dy="0"/>
+  </block>
+  <block id="AB_ControlTransformer_480_120" name="Control Transformer 480→120VAC" width="5.0" height="4.0">
+    <connector id="PRI_L1" type="AC480" x="0" y="1" dx="-1" dy="0"/>
+    <connector id="PRI_L2" type="AC480" x="0" y="3" dx="-1" dy="0"/>
+    <connector id="SEC_HOT" type="AC120" x="5.0" y="1" dx="1" dy="0"/>
+    <connector id="SEC_NEU" type="AC120" x="5.0" y="3" dx="1" dy="0"/>
+  </block>
+  <block id="AB_CircuitBreaker_120" name="1P Breaker 120VAC" width="2.0" height="2.0">
+    <connector id="IN_HOT" type="AC120" x="0" y="1" dx="-1" dy="0"/>
+    <connector id="OUT_HOT" type="AC120" x="2.0" y="1" dx="1" dy="0"/>
+  </block>
+  <block id="AB_PowerSupply_24VDC" name="Power Supply 120VAC→24VDC" width="4.0" height="3.0">
+    <connector id="AC_HOT" type="AC120" x="0" y="0.8" dx="-1" dy="0"/>
+    <connector id="AC_NEU" type="AC120" x="0" y="2.2" dx="-1" dy="0"/>
+    <connector id="DC_POS" type="DC24" x="4.0" y="0.8" dx="1" dy="0"/>
+    <connector id="DC_NEG" type="DC24" x="4.0" y="2.2" dx="1" dy="0"/>
+  </block>
+  <block id="AB_Wireway" name="Wireway" width="10.0" height="2.0"/>
+</library>

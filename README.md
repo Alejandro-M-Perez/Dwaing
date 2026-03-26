@@ -1,140 +1,155 @@
-# Dwaing MVP (C)
+# Dwaing
 
-This is the current MVP for an electrical panel CAD/validation engine written in C.
+Dwaing is a C-based industrial drawing engine with validation and an OpenGL viewer. It now supports both legacy electrical panel layouts and generalized document types for one-line diagrams, P&IDs, and general arrangements.
 
-It supports:
-- basic vector geometry primitives (`Vec2`, distance)
-- block library definitions with connector points
-- panel modeling with regions, rails, and placed devices
-- XML-driven CLI workflow
-- validation of geometry/electrical rules (AC/DC and AC voltage level segregation)
-- OpenGL viewer for vector rendering (regions, rails, devices, sample boxes)
+## Quick Start
 
-## How The Program Works Today
+Prerequisites:
 
-The CLI reads two files:
-- a **block library** (`library.xml`) with reusable blocks/connectors
-- a **panel definition** (`panel.xml`) with regions, rails, and devices
-
-Then it either:
-- prints a structured summary, or
-- validates the panel against rule checks
-
-### Current validation checks
-
-- Device references a known block.
-- Device references a known region.
-- Device references a known rail.
-- Device position is inside its region bounds.
-- Device rail belongs to the same region as the device.
-- Device domain must be `AC` or `DC`.
-- `DC` devices cannot include an `ac_level`.
-- `AC` devices must have `ac_level` `120`, `240`, or `480`.
-- Devices on the same rail must keep minimum spacing.
-- Devices on the same rail cannot mix `AC` and `DC`.
-- `AC` devices on the same rail cannot mix different AC levels.
-
-## Build And Run (Make Instructions)
-
-### Prerequisites
-
-- GCC/Clang compatible C compiler (`cc`)
+- `cc`
 - `make`
-- OpenGL development libraries
 - SDL2 development libraries
+- OpenGL development libraries
 
-### Build
+Build and run the regression suite:
+
+```sh
+make
+make test
+```
+
+Validate the shipped examples:
+
+```sh
+./bin/dwaing validate libraries/default/library.xml examples/panel.xml
+./bin/dwaing validate libraries/custom/AB_library_extended.xml examples/AB_panel.xml
+./bin/dwaing validate libraries/generic/process_library.xml examples/one_line.xml
+./bin/dwaing validate libraries/generic/process_library.xml examples/pid.xml
+./bin/dwaing validate libraries/generic/process_library.xml examples/general_arrangement.xml
+```
+
+Inspect them in the viewer:
+
+```sh
+make viewer
+./bin/dwaing_viewer examples/panel.xml libraries/default/library.xml
+./bin/dwaing_viewer examples/AB_panel.xml libraries/custom/AB_library_extended.xml
+./bin/dwaing_viewer examples/pid.xml libraries/generic/process_library.xml
+```
+
+## Example Documents
+
+- [examples/panel.xml](/home/loopk/Documents/Projects/Dwaing/examples/panel.xml): default panel-layout demo with nested regions, rails, wire ducts, and device placement rules.
+- [examples/AB_panel.xml](/home/loopk/Documents/Projects/Dwaing/examples/AB_panel.xml): current-schema panel demo using the Allen-Bradley custom library.
+- [examples/one_line.xml](/home/loopk/Documents/Projects/Dwaing/examples/one_line.xml): one-line electrical diagram using generic assets and a routed wire.
+- [examples/pid.xml](/home/loopk/Documents/Projects/Dwaing/examples/pid.xml): grouped P&ID example with pipes and an assembly asset.
+- [examples/general_arrangement.xml](/home/loopk/Documents/Projects/Dwaing/examples/general_arrangement.xml): general arrangement example with generic objects and links.
+- [examples/README.md](/home/loopk/Documents/Projects/Dwaing/examples/README.md): quick command index for all shipped examples.
+
+## Supported Concepts
+
+- Legacy panel libraries with `block`, `V`, `panel_vector`, and `backplane_vector`
+- Generic asset libraries with `symbol`, `assembly`, `port`, and `member`
+- Panel documents with regions, rails, wire ducts, and devices
+- Generic documents with objects, groups, ports, and connections
+- Document kinds: `panel`, `one_line`, `pid`, and `ga`
+- CLI validation and structured summaries
+- SDL/OpenGL viewer for both panel and generic documents
+
+## CLI
+
+Build:
 
 ```sh
 make
 ```
 
-This creates the executable at `bin/dwaing`.
-
-### Build the OpenGL viewer
+Viewer:
 
 ```sh
 make viewer
 ```
 
-This creates `bin/dwaing_viewer`.
-
-### Run with sample files
+Commands:
 
 ```sh
-./bin/dwaing validate examples/library.xml examples/panel.xml
-./bin/dwaing summary examples/library.xml examples/panel.xml
+./bin/dwaing validate <library.xml[,library2.xml,...]> <document.xml>
+./bin/dwaing summary <library.xml[,library2.xml,...]> <document.xml>
 ```
 
-### Use the built-in demo target
+Exit codes:
 
-```sh
-make run-example
-```
-
-This runs both `validate` and `summary` using the sample XML files.
-
-### Launch the viewer
-
-```sh
-./bin/dwaing_viewer examples/panel.xml
-```
-
-or:
-
-```sh
-make run-viewer
-```
-
-Viewer controls:
-- `+` / `-` zoom in/out
-- arrow keys pan
-- `r` reset view
-- `q` or `ESC` quit
-
-### Clean build artifacts
-
-```sh
-make clean
-```
-
-## CLI Commands
-
-```sh
-./bin/dwaing validate <library.xml> <panel.xml>
-./bin/dwaing summary <library.xml> <panel.xml>
-```
-
-`validate` exit codes:
 - `0`: valid
-- `2`: invalid (rules failed)
+- `2`: invalid
 - `1`: parse/load/usage error
 
-## XML Shape (Current MVP Parser)
+## Libraries
 
-The parser is intentionally strict and minimal (dependency-free).
+Library files live under [libraries/](/home/loopk/Documents/Projects/Dwaing/libraries).
 
-### `library.xml`
+- [libraries/default/library.xml](/home/loopk/Documents/Projects/Dwaing/libraries/default/library.xml): default panel block library
+- [libraries/custom/AB_library_extended.xml](/home/loopk/Documents/Projects/Dwaing/libraries/custom/AB_library_extended.xml): Allen-Bradley custom panel library
+- [libraries/generic/process_library.xml](/home/loopk/Documents/Projects/Dwaing/libraries/generic/process_library.xml): generic process and equipment library
 
-- `<block id="...">`
-- `<connector id="..." type="..." x="..." y="..." dx="..." dy="..." />`
+The loader can merge multiple library files by comma-separating paths in the CLI arguments.
 
-### `panel.xml`
+## Viewer
 
-- `<panel name="...">`
-- `<region id="..." min_x="..." min_y="..." max_x="..." max_y="..." />`
-- `<rail id="..." region="..." x1="..." y1="..." x2="..." y2="..." />`
-- `<device id="..." block="..." region="..." rail="..." x="..." y="..." domain="AC|DC" ac_level="120|240|480" />`
+Launch examples:
 
-See:
-- `examples/library.xml`
-- `examples/panel.xml`
+```sh
+./bin/dwaing_viewer examples/panel.xml libraries/default/library.xml
+./bin/dwaing_viewer examples/general_arrangement.xml libraries/generic/process_library.xml
+./bin/dwaing_viewer examples/pid.xml libraries/generic/process_library.xml
+```
 
-## Viewer Notes
+Controls:
 
-- Regions are drawn as green outlines.
-- Rails are drawn as brown line segments.
-- Devices are drawn as small outlined boxes:
-  - red for AC
-  - blue for DC
-- Extra sample vector geometry boxes are always rendered near the top area, each labeled with width/height.
+- `+` / `-`: zoom
+- Arrow keys: pan
+- `r`: reset view
+- `1..5`: toggle layers
+- Click objects or connections to inspect them
+- `q` or `Esc`: quit
+
+Current limitation:
+
+- Editing from the viewer is implemented for legacy panel documents. Generic document inspection is read-only.
+
+## XML Overview
+
+Legacy panel libraries:
+
+- `<panel_vector ... />`
+- `<backplane_vector ... />`
+- `<block ...>` with nested `<V ... />` or `<connector ... />`
+
+Generic asset libraries:
+
+- `<symbol ...>` with nested `<port ... />`
+- `<assembly ...>` with nested `<port ... />` and `<member ... />`
+
+Generic documents:
+
+- `<document kind="one_line|pid|ga" ...>`
+- `<group ...>`
+- `<object kind="symbol" asset="..." ... />`
+- `<connection kind="wire|pipe|link" from="object.port" to="object.port" />`
+
+Legacy panel documents:
+
+- `<panel ...>`
+- `<region ...>`
+- `<wire_duct ...>`
+- `<rail ...>`
+- `<device ...>`
+
+## Project Structure
+
+```text
+include/                 C headers
+src/                     C source files
+libraries/               Legacy and generic asset libraries
+examples/                Working sample documents
+tests/                   Regression test harness
+```

@@ -1,0 +1,6 @@
+<document kind="ga" name="GA_INVALID" width="100" height="60">
+  <group id="area_main" x="0" y="0" width="100" height="60">
+    <object id="pump_1" kind="symbol" parent="area_main" asset="PUMP" role="pump" x="10" y="12" />
+    <connection id="broken_link" kind="link" from="pump_1.OUT" to="missing_tank.IN" />
+  </group>
+</document>
